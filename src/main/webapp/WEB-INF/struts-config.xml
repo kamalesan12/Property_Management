@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+                               "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+	<form-beans>
+		<form-bean name="loginForm" type="com.arbor.Beans.LoginForm" />
+		<form-bean name="propertyForm"
+			type="com.arbor.Beans.PropertyForm" />
+		<form-bean name="phase1form_id"
+			type="com.arbor.Beans.PropertyForm2" />
+		<form-bean name="emptyForm" type="com.arbor.forms.EmptyForm" />
+		
+		<form-bean name="updatepropform" type="com.arbor.Beans.UpdateForm"></form-bean>
+	</form-beans>
+
+	<action-mappings>
+	
+		<!-- Property Load before welcome page load -->
+
+		<action path="/viewAll"
+			type="com.arbor.controller.PropertyProcessingAction"
+			name="propertyForm" scope="request" validate="false">
+			<forward name="indexPage" path="/index.jsp" />
+			<forward name="failure" path="/error.jsp" />
+		</action>
+		
+		<!-- Signup config and mappings -->
+
+	<action path="/signupAction" name="loginForm"
+		type="com.arbor.controller.SignupAction" scope="request"
+		validate="true">
+		<forward name="success" path="/login.jsp"/>
+		<forward name="failure" path="/signup.jsp"/> 
+	</action>
+	
+	<!-- Login Stuffs -->
+	
+	
+		<action path="/loginAction" name="loginForm"
+			type="com.arbor.controller.LoginAction" scope="request"
+			validate="true">
+			<forward name="success" path="/success.jsp"></forward>
+			<forward name="failure" path="/failure.jsp"></forward>
+		</action>
+		
+		
+		
+		<action path="/updateProperty" name="updatepropform"
+			type="com.arbor.controller.UpdatePropertyController" scope="request"
+			validate="true">
+			<forward name="success" path="/success.jsp"></forward>
+			<forward name="failure" path="/failure.jsp"></forward>
+		</action>
+
+
+
+
+		<action path="/PropertyAction"
+			type="com.arbor.controller.PropertyAction" scope="session"
+			parameter="action" name="propertyForm">
+			<forward name="viewProperties" path="/viewProperties.jsp" />
+			<forward name="addProperty" path="/addProperty.jsp" />
+			<forward name="deleteProperty" path="/deleteProperty.jsp" />
+			<forward name="updateProperty" path="/updateProperty.jsp" />
+			<forward name="viewByArea" path="/viewByArea.jsp" />
+			<forward name="lowestValue" path="/lowestValue.jsp" />
+			<forward name="occupiedProperties"
+				path="/occupiedProperties.jsp" />
+		</action>
+
+		<action path="/viewAll"
+			type="com.arbor.controller.PropertyProcessingAction"
+			name="propertyForm" scope="request" validate="false">
+			<forward name="indexPage" path="/index.jsp" />
+			<forward name="failure" path="/error.jsp" />
+		</action>
+
+
+
+
+
+		<action path="/PropertyProcessing"
+			type="com.arbor.controller.PropertyProcessingAction"
+			name="propertyForm" scope="request" parameter="action"
+			validate="false">
+			<forward name="actionSuccess" path="/actionSuccess.jsp" />
+			<forward name="actionfailure" path="/actionfailure.jsp" />
+			<forward name="updateproperty" path="/updateProperty.jsp" />
+			<forward name="viewByAreaPage" path="/viewByArea.jsp" />
+			<forward name="viewOccupiedPage" path="/viewOccupied.jsp" />
+			<forward name="propertyList" path="/propertyList.jsp" />
+			<forward name="failure" path="/propertyList.jsp" />
+
+		</action>
+
+
+	</action-mappings>
+
+	<message-resources
+		parameter="com.arbor.resources.ApplicationResources" />
+
+
+</struts-config>
